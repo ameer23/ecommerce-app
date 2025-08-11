@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\RegisterPage;
+use App\Livewire\Auth\LoginPage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +14,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::get('/register', RegisterPage::class)->name('register');
+    Route::get('/login', LoginPage::class)->name('login');
 
 
 Route::middleware('auth')->group(function () {
