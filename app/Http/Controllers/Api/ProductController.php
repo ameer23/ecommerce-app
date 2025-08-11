@@ -18,6 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $products = Product::all();
+
         return $this->successResponse($products, 'Products retrieved successfully.');
     }
 
