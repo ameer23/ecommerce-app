@@ -15,15 +15,15 @@
                     <a href="/" class="text-xl font-bold">E-Commerce</a>
                     <div class="flex items-center space-x-4">
                         @auth
-                            <a href="/profile" class="text-gray-600 hover:text-black">Profile</a>
-                            {{-- We will add a real logout button here soon --}}
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="text-gray-600 hover:text-black">Log Out</button>
-                            </form>
+                            <div class="flex items-center space-x-4">
+                                <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-black">Profile</a>
+                                <livewire:logout />
+                            </div>
                         @else
-                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-black">Log In</a>
-                            <a href="{{ route('register') }}" class="text-gray-600 hover:text-black">Register</a>
+                            <div class="flex items-center space-x-4">
+                                <a href="{{ route('login') }}" class="text-gray-600 hover:text-black">Log In</a>
+                                <a href="{{ route('register') }}" class="text-gray-600 hover:text-black">Register</a>
+                            </div>
                         @endauth
                     </div>
                 </div>

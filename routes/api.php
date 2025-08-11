@@ -24,6 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+
     // We will build these endpoints next. For now, they are
     // correctly placed inside the protected group.
     // Route::post('/cart', [CartController::class, 'store']);
