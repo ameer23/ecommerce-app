@@ -15,6 +15,7 @@ Route::get('/dashboard', function () {
 
     Route::get('/register', RegisterPage::class)->name('register');
     Route::get('/login', LoginPage::class)->name('login');
+    
 
 
 Route::middleware('auth')->group(function () {

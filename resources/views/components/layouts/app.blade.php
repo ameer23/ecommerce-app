@@ -8,7 +8,6 @@
         @livewireStyles
     </head>
     <body class="antialiased bg-gray-50">
-        {{-- Simple Navigation Bar --}}
         <nav class="bg-white shadow-sm">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center py-4">
@@ -16,6 +15,7 @@
                     <div class="flex items-center space-x-4">
                         @auth
                             <div class="flex items-center space-x-4">
+                                <livewire:cart-counter />
                                 <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-black">Profile</a>
                                 <livewire:logout />
                             </div>

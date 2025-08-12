@@ -1,5 +1,19 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
+
+        
+<div class="sm:mx-auto sm:w-full sm:max-w-md">
+    @if (session('info'))
+        <div class="mb-4 rounded-md bg-blue-50 p-4">
+            <div class="flex">
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-blue-800">{{ session('info') }}</p>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
     </div>
 

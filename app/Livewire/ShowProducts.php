@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\CartItem;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ShowProducts extends Component
@@ -12,6 +14,30 @@ class ShowProducts extends Component
     public function filterByCategory(?string $category)
     {
         $this->selectedCategory = $category;
+    }
+
+    public function confirmAddToCart(int $productId)
+    {
+        if (!Auth::check()) {
+            session()->flash('info', 'You must be logged in to add items to your cart.');
+            return $this->redirect('/login');
+        }
+
+        $existingCartItem = CartItem::where('user_id', Auth::id())
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($existingCartItem) {
+            $existingCartItem->increment('quantity');
+        } else {
+            CartItem::create([
+                'user_id' => Auth::id(),
+                'product_id' => $productId,
+                'quantity' => 1,
+            ]);
+        }
+
+        $this->dispatch('cart-updated');
     }
 
     public function render()
@@ -24,7 +50,12 @@ class ShowProducts extends Component
 
         return view('livewire.show-products', [
             'products' => $products,
-            'categories' => ['Chairs', 'Electronics'] // We can make this dynamic later
+            'categories' => ['Chairs', 'Electronics']
         ]);
+    }
+
+    public function ping()
+    {
+        dump('pong from Alpine');
     }
 }
