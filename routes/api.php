@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 
 
 
@@ -26,10 +27,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    Route::post('/cart', [CartController::class, 'store']);
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::delete('/cart/{cartItem}', [CartController::class, 'destroy']);
+
+
 
     // We will build these endpoints next. For now, they are
     // correctly placed inside the protected group.
-    // Route::post('/cart', [CartController::class, 'store']);
     // Route::delete('/cart/{id}', [CartController::class, 'destroy']);
     // Route::post('/orders', [OrderController::class, 'store']);
     // Route::post('/logout', [AuthController::class, 'logout']);
