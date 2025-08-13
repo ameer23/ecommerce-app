@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\RegisterPage;
 use App\Livewire\Auth\LoginPage;
 use App\Livewire\CartPage;
+use App\Livewire\OrderConfirmationPage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/cart', CartPage::class)->name('cart.page');
+    Route::get('/order-confirmation', OrderConfirmationPage::class)->name('order.confirmation');
+
 
 });
 

@@ -26,8 +26,8 @@
 
             <div class="mt-6 text-right">
                 <p class="text-2xl font-bold">Total: ${{ number_format($total, 2) }}</p>
-                <button class="mt-4 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800">
-                    Proceed to Checkout
+                <button wire:click="placeOrder" class="mt-4 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800">
+                Proceed to Checkout
                 </button>
             </div>
         </div>
