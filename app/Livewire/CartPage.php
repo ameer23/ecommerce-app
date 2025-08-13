@@ -6,9 +6,9 @@ use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
-use App\Models\Order;
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
+use App\Services\OrderService;
+
 
 #[Layout('components.layouts.app')]
 class CartPage extends Component
@@ -63,38 +63,16 @@ class CartPage extends Component
         }
     }
 
-    public function placeOrder()
+    public function placeOrder(OrderService $orderService) 
     {
-        $cartItems = Auth::user()->cartItems()->with('product')->get();
+        $order = $orderService->createOrderFromCart(Auth::user());
 
-        if ($cartItems->isEmpty()) {
-            return; 
+        if ($order) {
+            $this->dispatch('cart-updated');
+            return $this->redirect('/order-confirmation', navigate: true);
         }
 
-        $total = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
-        });
-
-        DB::transaction(function () use ($cartItems, $total) {
-            $order = Order::create([
-                'user_id' => Auth::id(),
-                'total_price' => $total,
-            ]);
-
-            foreach ($cartItems as $cartItem) {
-                $order->items()->create([
-                    'product_id' => $cartItem->product_id,
-                    'quantity' => $cartItem->quantity,
-                    'price' => $cartItem->product->price,
-                ]);
-            }
-
-            Auth::user()->cartItems()->delete();
-        });
-
-        $this->dispatch('cart-updated');
-
-        return $this->redirect('/order-confirmation', navigate: true);
+        session()->flash('info', 'Your cart is empty.');
     }
 
     public function render()
