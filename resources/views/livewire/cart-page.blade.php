@@ -18,7 +18,7 @@
                             <span>{{ $item->quantity }}</span>
                             <button wire:click="incrementQuantity({{ $item->id }})" class="px-2 py-1 bg-gray-200 rounded">+</button>
                         </div>
-                        <p class="font-semibold">${{ number_format($item->product->price * $item->quantity, 2) }}</p>
+                        <p class="font-semibold">${{ $item->subtotal }}</p>
                         <button wire:click="removeItem({{ $item->id }})" class="text-red-500 hover:text-red-700">Remove</button>
                     </div>
                 </div>
