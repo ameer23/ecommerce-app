@@ -36,5 +36,13 @@ public function run(): void
         'category' => 'Chairs',
         'image_url' => 'https://images.pexels.com/photos/2762247/pexels-photo-2762247.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     ]);
+
+    Product::create([
+    'name' => '4K Ultra-Wide Monitor',
+    'description' => 'An immersive display for productivity and entertainment.',
+    'price' => 799.50,
+    'category' => 'Monitors', 
+    'image_url' => 'https://images.pexels.com/photos/1999463/pexels-photo-1999463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+]);
 }
 }

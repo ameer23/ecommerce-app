@@ -41,21 +41,23 @@ class ShowProducts extends Component
     }
 
     public function render()
-    {
-        $products = Product::query()
-            ->when($this->selectedCategory, function ($query) {
-                $query->where('category', $this->selectedCategory);
-            })
-            ->get();
+{
+    $products = Product::query()
+        ->when($this->selectedCategory, function ($query) {
+            $query->where('category', $this->selectedCategory);
+        })
+        ->get();
 
-        return view('livewire.show-products', [
-            'products' => $products,
-            'categories' => ['Chairs', 'Electronics']
-        ]);
-    }
+    $categories = Product::query()
+        ->whereNotNull('category')
+        ->distinct()
+        ->pluck('category');
 
-    public function ping()
-    {
-        dump('pong from Alpine');
-    }
+    return view('livewire.show-products', [
+        'products' => $products,
+        'categories' => $categories 
+    ]);
+}
+
+    
 }
