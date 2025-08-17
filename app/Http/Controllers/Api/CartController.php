@@ -7,11 +7,13 @@ use App\Http\Requests\StoreCartItemRequest;
 use App\Http\Resources\CartItemResource;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
+use \App\Traits\ApiResponse;
+
 
 class CartController extends Controller
 {
 
-        use \App\Traits\ApiResponse;
+        use ApiResponse;
 
     /**
      * Display a listing of the resource.

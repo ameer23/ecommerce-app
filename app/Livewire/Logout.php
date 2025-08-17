@@ -18,10 +18,6 @@ class Logout extends Component
 
     public function render()
     {
-        return <<<'HTML'
-            <button wire:click="logout" class="text-gray-600 hover:text-black">
-                Log Out
-            </button>
-        HTML;
+        return view('livewire.logout');
     }
 }
