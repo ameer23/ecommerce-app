@@ -11,10 +11,10 @@ use App\Http\Requests\RegisterRequest;
 #[Layout('components.layouts.app')]
 class RegisterPage extends Component
 {
-    public string $name = '';
-    public string $email = '';
-    public string $password = '';
-    public string $password_confirmation = '';
+    public string $name = null;
+    public string $email = null;
+    public string $password = null;
+    public string $password_confirmation = null;
 
     public function register()
     {
