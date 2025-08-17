@@ -7,7 +7,7 @@ use App\Http\Requests\StoreCartItemRequest;
 use App\Http\Resources\CartItemResource;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
-use \App\Traits\ApiResponse;
+use App\Traits\ApiResponse;
 
 
 class CartController extends Controller
@@ -64,20 +64,14 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, CartItem $cartItem)
+    public function show(Request $request)
     {
-        if ($request->user()->id !== $cartItem->user_id) {
-            return $this->errorResponse('Not Found.', 404);
-        }
+        $cartItems = CartItem::with('product')
+                             ->where('user_id', $request->user()->id)
+                             ->get();
 
-        $cartItem->load('product');
-
-        return $this->successResponse(
-            new CartItemResource($cartItem),
-            'Cart item retrieved successfully.'
-        );
+        return CartItemResource::collection($cartItems);
     }
-
     /**
      * Update the specified resource in storage.
      */

@@ -11,10 +11,10 @@ use Livewire\Component;
 class LoginPage extends Component
 {
     #[Rule('required|email')]
-    public string $email = null;
+    public ?string $email = null;
 
     #[Rule('required')]
-    public string $password = null;
+    public ?string $password = null;
 
     #[Rule('boolean')]
     public bool $remember = false;

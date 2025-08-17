@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use App\Http\Requests\RegisterRequest; 
+use App\Http\Requests\RegisterRequest;
+use phpDocumentor\Reflection\Types\Nullable;
 
 #[Layout('components.layouts.app')]
 class RegisterPage extends Component
 {
-    public string $name = null;
-    public string $email = null;
-    public string $password = null;
-    public string $password_confirmation = null;
+   public ?string $name = null;
+    public ?string $email = null;
+    public ?string $password = null;
+    public ?string $password_confirmation = null;
 
     public function register()
     {

@@ -26,8 +26,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
-    {
-        return $this->successResponse($product, 'Product retrieved successfully.');
-    }
+    public function show(Product $product): ProductResource
+{
+    
+    $product->load('category', 'reviews');
+
+    return new ProductResource($product);
+}
 }
