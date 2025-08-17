@@ -35,30 +35,24 @@ class CartController extends Controller
      */
      public function store(StoreCartItemRequest $request)
     {
-        // Get the validated data as an array
         $validatedData = $request->validated();
         $productId = $validatedData['product_id'];
         $quantity = $validatedData['quantity'];
 
-        // The user() method on the request is correct
         $user = $request->user();
 
-        // Check if the item already exists in the cart
         $cartItem = $user->cartItems()->where('product_id', $productId)->first();
 
         if ($cartItem) {
-            // If it exists, update the quantity
             $cartItem->quantity += $quantity;
             $cartItem->save();
         } else {
-            // If not, create a new cart item
             $cartItem = $user->cartItems()->create([
                 'product_id' => $productId,
                 'quantity' => $quantity,
             ]);
         }
 
-        // Load the product relationship to include it in the resource
         $cartItem->load('product');
 
         return $this->successResponse(
@@ -70,9 +64,18 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, CartItem $cartItem)
     {
-        //
+        if ($request->user()->id !== $cartItem->user_id) {
+            return $this->errorResponse('Not Found.', 404);
+        }
+
+        $cartItem->load('product');
+
+        return $this->successResponse(
+            new CartItemResource($cartItem),
+            'Cart item retrieved successfully.'
+        );
     }
 
     /**
