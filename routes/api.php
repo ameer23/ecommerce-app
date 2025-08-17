@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 
 
-
+Route::prefix('v1')->group(function () {
 
 // PUBLIC API ROUTES
 Route::get('/products', [ProductController::class, 'index']); // Assuming you'll create an index method
@@ -38,10 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-    // We will build these endpoints next. For now, they are
-    // correctly placed inside the protected group.
-    // Route::delete('/cart/{id}', [CartController::class, 'destroy']);
-    // Route::post('/orders', [OrderController::class, 'store']);
-    // Route::post('/logout', [AuthController::class, 'logout']);
+});
+
 
 });
