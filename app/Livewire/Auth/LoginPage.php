@@ -27,6 +27,8 @@ class LoginPage extends Component
             $this->addError('email', 'The provided credentials do not match our records.');
             return;
         }
+        session()->regenerate();
+
 
         return $this->redirect('/');
     }
